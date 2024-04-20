@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar OST</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex justify-content-between align-items-center">
+            
+            <h1>Editar OST</h1> <img src="{{url_for('static', filename='img/edit.png',)}}">
+            <a href="/dashboardost/2" class="btn btn-info" >Dashboard</a>
+            <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+        </header>
+        <!-- MENSAJES DE ERROR -->
+        {% with messages = get_flashed_messages(category_filter=['clientes']) %}
+            {% if messages %}
+                <div class="alert alert-danger">
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <!-- FORMULARIO -->
+        <form action="/update/ost" method="POST">
+            
+            <div>
+                <label>Folio</label>
+                <input type="text" name="folio" class="form-control" >
+            </div>
+                        
+            <div>
+                <label>Fecha</label>
+                <input type="date" name="fecha" class="form-control" >
+            </div>
+            <div>
+                <label>Equipo</label>
+                <select name="equipo" class="form-select">
+                    <option >Impresora</option>
+                    <option >Capturador</option>
+                    <option >Router</option>
+                    <option >Ap</option>
+                </select>
+            </div>
+
+            <table with="100%">
+                <tr>
+                    <td>
+                        <div>
+                            <label>Teclado</label>
+                            <input type="checkbox" name="teclado" class="form-check-input" >
+                        </div>
+                        <div>
+                            <label>Scanner Laser</label>
+                            <input type="checkbox" name="scanner_laser" class="form-check-input" >
+                        </div>
+            
+                        <div>
+                            <label>Display</label>
+                            <input type="checkbox" name="display" class="form-check-input" >
+                        </div>
+                        <div>
+                            <label>Touchpad</label>
+                            <input type="checkbox" name="touchpad" class="form-check-input" >
+                        </div>
+                        <div>
+                            <label>Gatillo</label>
+                            <input type="checkbox" name="gatillo" class="form-check-input" >
+                        </div>
+                        <div>
+                            <label>Carcasa Frontal</label>
+                            <input type="checkbox" name="carcasa_frontal" class="form-check-input" >
+                        </div>
+                        <div>
+                            <label>Carcasa Trasera</label>
+                            <input type="checkbox" name="carcasa_trasera" class="form-check-input" >
+                        </div>
+                    </td>
+
+                    <td>
+                        <div>
+                            <label>Puerto Comunicacion</label>
+                            <input type="checkbox" name="puerto_comunicacion" class="form-check-input" >
+                        </div>
+                        <div>
+                            <label>Cabezal</label>
+                            <input type="checkbox" name="cabezal" class="form-check-input" >
+                        </div>
+                        <div>
+                            <label>Platen Roller</label>
+                            <input type="checkbox" name="platen_roller" class="form-check-input" >
+                        </div>
+                        <div>
+                            <label>Sensores</label>
+                            <input type="checkbox" name="sensores" class="form-check-input" >
+                        </div>
+                        <div>
+                            <label>Comunicacion</label>
+                            <input type="checkbox" name="comunicacion" class="form-check-input" >
+                        </div>
+                        <div>
+                            <label>Limpieza</label>
+                            <input type="checkbox" name="limpieza" class="form-check-input" >
+                        </div>
+                                    
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <label>Observaciones</label>
+                <input type="text" name="observaciones" class="form-control" >
+            </div>
+
+
+            <input type="hidden" name="user_id" value="{{session['user_id']}}" >
+            <input type="hidden" name="id" value="{{ost.id}}">
+            <input type="submit" class="btn btn-success mt-3" value="Guardar Edicion">
+        </form>
+    </div>
+</body>
+</html>
