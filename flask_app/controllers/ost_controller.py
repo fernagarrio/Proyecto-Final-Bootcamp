@@ -41,7 +41,7 @@ def edit_ost(id):
     diccionario = {"id": id}
     OSt = Ost.get_by_id(diccionario)
 
-    return render_template('edit_ost.html', ost=OSt, now=datetime.now )
+    return render_template('edit_ost.html', ost=OSt)
 
 @app.route('/update/ost', methods=['POST'])
 def update_ost():

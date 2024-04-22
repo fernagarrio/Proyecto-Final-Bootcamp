@@ -12,6 +12,8 @@ body {
     opacity: 1.2;
 }
 
+.table_custom { --bs-table-bg: transparent !important; }
+
 /* Glassmorphism card effect */
 .card {
     backdrop-filter: blur(16px) saturate(180%);

@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar OST</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
 </head>
 <body>
     <div class="container">
-        <header class="d-flex justify-content-between align-items-center">
-            
-            <h1>Editar OST</h1> <img src="{{url_for('static', filename='img/edit.png',)}}">
-            <a href="/dashboardost/2" class="btn btn-info" >Dashboard</a>
-            <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
-        </header>
+      <div class="card p-3 mt-3">
+            <header class="d-flex justify-content-between align-items-center">
+              <h1>Editar OST</h1> <img src="{{url_for('static', filename='img/edit.png',)}}">
+              <a href="/dashboardost/2" class="btn btn-info" >Dashboard</a>
+              <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+            </header>
+        </div>
+   
         <!-- MENSAJES DE ERROR -->
-        {% with messages = get_flashed_messages(category_filter=['clientes']) %}
+        {% with messages = get_flashed_messages(category_filter=['ost']) %}
             {% if messages %}
                 <div class="alert alert-danger">
                     {% for message in messages %}
@@ -26,15 +29,15 @@
         {% endwith %}
         <!-- FORMULARIO -->
         <form action="/update/ost" method="POST">
-            
+        <div class="card p-3 mt-3">
             <div>
                 <label>Folio</label>
-                <input type="text" name="folio" class="form-control" >
+                <input type="text" name="folio" class="form-control" value="{{ost.folio}}" >
             </div>
                         
             <div>
                 <label>Fecha</label>
-                <input type="date" name="fecha" class="form-control" >
+                <input type="date" name="fecha" class="form-control"  value="{{ost.fecha}}" >
             </div>
             <div>
                 <label>Equipo</label>
@@ -46,79 +49,184 @@
                 </select>
             </div>
 
-            <table with="100%">
+            <table with="90%" class="table table-sm table_custom">
                 <tr>
-                    <td>
-                        <div>
-                            <label>Teclado</label>
-                            <input type="checkbox" name="teclado" class="form-check-input" >
-                        </div>
-                        <div>
-                            <label>Scanner Laser</label>
-                            <input type="checkbox" name="scanner_laser" class="form-check-input" >
-                        </div>
-            
-                        <div>
-                            <label>Display</label>
-                            <input type="checkbox" name="display" class="form-check-input" >
-                        </div>
-                        <div>
-                            <label>Touchpad</label>
-                            <input type="checkbox" name="touchpad" class="form-check-input" >
-                        </div>
-                        <div>
-                            <label>Gatillo</label>
-                            <input type="checkbox" name="gatillo" class="form-check-input" >
-                        </div>
-                        <div>
-                            <label>Carcasa Frontal</label>
-                            <input type="checkbox" name="carcasa_frontal" class="form-check-input" >
-                        </div>
-                        <div>
-                            <label>Carcasa Trasera</label>
-                            <input type="checkbox" name="carcasa_trasera" class="form-check-input" >
-                        </div>
+                    <td width="5%"  >
+                        <input type="radio" name="teclado" id="tecladoYES" value="1" {% if ost.teclado == 1 %} checked {% endif %}>
+                        <label for="tecladoYES">SI</label>
+                    </td>
+                    <td width="5%"  >
+                        <input type="radio" name="teclado" id="tecladoNO" value="0"  {% if ost.teclado == 0 %} checked {% endif %}>
+                        <label for="tecladoNO">NO</label>
+                    </td>
+                    <td width="20%"  >
+                        <label>Teclado</label>
                     </td>
 
-                    <td>
-                        <div>
-                            <label>Puerto Comunicacion</label>
-                            <input type="checkbox" name="puerto_comunicacion" class="form-check-input" >
+                    <td width="5%">
+                        <input type="radio" name="scanner_laser" id="scanner_laserYES" value="1" {% if ost.scanner_laser == 1 %} checked {% endif %}>
+                        <label for="scanner_laserYES">SI</label>
+                    </td>
+                    <td width="5%">
+                        <input type="radio" name="scanner_laser" id="scanner_laserNO" value="0" {% if ost.scanner_laser == 0 %} checked {% endif %}>
+                        <label for="scanner_laserNO">NO</label>
+                    </td>
+                    <td width="20%">
+                        <label>Scanner Laser</label>
+                    </td>
+
+                    <td width="5%"  >
+                            <input type="radio" name="display" id="displayYES" value="1"{% if ost.display == 1 %} checked {% endif %}>
+                            <label for="displayYES">SI</label>
+                    </td>
+                    <td width="5%"  >
+                            <input type="radio" name="display" id="displayNO" value="0" {% if ost.display == 0 %} checked {% endif %}>
+                            <label for="displayNO">NO</label>
+                    </td>
+                    <td width="20%"  >
+                        <label>Display</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="5%"  >
+                        <input type="radio" name="touchpad" id="touchpadYES" value="1"{% if ost.touchpad == 1 %} checked {% endif %}>
+                        <label for="touchpadYES">SI</label>
+                    </td>
+                    <td width="5%"  >
+                        <input type="radio" name="touchpad" id="touchpadNO" value="0"{% if ost.touchpad == 0 %} checked {% endif %}>
+                        <label for="touchpadNO">NO</label>
+                    </td>
+                    <td width="20%"  >
+                        <label>Touchpad</label>
+                    </td>
+
+                    <td width="5%">
+                        <input type="radio" name="gatillo" id="gatilloYES" value="1" {% if ost.gatillo == 1 %} checked {% endif %}>
+                        <label for="gatilloYES">SI</label>
+                    </td>
+                    <td width="5%">
+                            <input type="radio" name="gatillo" id="gatilloNO" value="0" {% if ost.gatillo == 0 %} checked {% endif %} >
+                            <label for="gatilloNO">NO</label>
+                    </td>
+                    <td width="20%">
+                        <label>Gatillo</label>
+                    </td>
+
+                    <td width="5%"  >
+                        <input type="radio" name="carcasa_frontal" id="carcasa_frontalYES" value="1"{% if ost.carcasa_frontal == 1 %} checked {% endif %}>
+                        <label for="carcasa_frontalYES">SI</label>
+                    </td>
+                    <td width="5%"  >
+                        <input type="radio" name="carcasa_frontal" id="carcasa_frontalNO" value="0" {% if ost.carcasa_frontal == 0 %} checked {% endif %} >
+                        <label for="carcasa_frontalNO">NO</label>
+                    </td>
+                    <td width="20%"  >
+                        <label>Carcasa Frontal</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="5%"  >
+                        <input type="radio" name="carcasa_trasera" id="carcasa_traseraYES" value="1"{% if ost.carcasa_trasera == 1 %} checked {% endif %}>
+                        <label for="carcasa_traseraYES">SI</label>
+                    </td>
+                    <td width="5%"  >
+                        <input type="radio" name="carcasa_trasera" id="carcasa_traseraNO" value="0" {% if ost.carcasa_trasera == 0 %} checked {% endif %} >
+                        <label for="carcasa_traseraNO">NO</label>
+                    </td>
+                    <td width="20%"  >
+                        <label>Carcasa Trasera</label>
+                    </td>
+
+                    <td width="5%">
+                        <input type="radio" name="puerto_comunicacion" id="puerto_comunicacionYES" value="1" {% if ost.puerto_comunicacion == 1 %} checked {% endif %}>
+                        <label for="puerto_comunicacionYES">SI</label>
+                    </td>
+                    <td width="5%">
+                        <input type="radio" name="puerto_comunicacion" id="puerto_comunicacionNO" value="0" {% if ost.puerto_comunicacion == 0 %} checked {% endif %}>
+                        <label for="puerto_comunicacionNO">NO</label>
+                    </td>
+                    <td width="20%">
+                        <label>Puerto Comunicacion</label>
+                    </td>
+
+                    <td width="5%"  >
+                        <input type="radio" name="cabezal" id="cabezalYES" value="1"{% if ost.cabezal == 1 %} checked {% endif %}>
+                        <label for="puerto_comunicacionYES">SI</label>
+                    </td>
+                    <td width="5%"  >
+                        <input type="radio" name="cabezal" id="cabezalNO" value="0" {% if ost.cabezal == 0 %} checked {% endif %} >
+                        <label for="cabezalNO">NO</label>
+                    </td>
+                    <td width="20%"  >
+                        <label>Cabezal</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="5%"  >
+                        <input type="radio" name="platen_roller" id="platen_rollerYES" value="1" {% if ost.platen_roller == 1 %} checked {% endif %}>
+                        <label for="platen_rollerYES">SI</label>
+                    </td>
+                    <td width="5%"  >
+                        <input type="radio" name="platen_roller" id="platen_rollerNO" value="0" {% if ost.platen_roller== 0 %} checked {% endif %}>
+                        <label for="platen_rollerNO">NO</label>
+                    </td>
+                    <td width="20%"  >
+                        <label>Platen Roller</label>
+                    </td>
+
+                    <td width="5%">
+                        <input type="radio" name="sensores" id="sensoresYES" value="1" {% if ost.sensores == 1 %} checked {% endif %}>
+                        <label for="sensoresYES">SI</label>
+                    </td>
+                    <td width="5%">
+                        <input type="radio" name="sensores" id="sensoresNO" value="0" {% if ost.sensores == 0 %} checked {% endif %}>
+                        <label for="sensoresNO">NO</label>
+                    </td>
+                    <td width="20%">
+                        <label>Sensores</label>
+                    </td>
+
+                    <td width="5%"  >
+                        <input type="radio" name="comunicacion" id="comunicacionYES" value="1" {% if ost.comunicacion == 1 %} checked {% endif %}>
+                        <label for="comunicacionsYES">SI</label>
+                    </td>
+                    <td width="5%"  >
+                        <input type="radio" name="comunicacion" id="comunicacionNO" value="0" {% if ost.comunicacion == 0 %} checked {% endif %} >
+                        <label for="comunicacionNO">NO</label>
+                    </td>
+                    <td width="20%"  >
+                        <label>Comunicacion</label>
                         </div>
-                        <div>
-                            <label>Cabezal</label>
-                            <input type="checkbox" name="cabezal" class="form-check-input" >
-                        </div>
-                        <div>
-                            <label>Platen Roller</label>
-                            <input type="checkbox" name="platen_roller" class="form-check-input" >
-                        </div>
-                        <div>
-                            <label>Sensores</label>
-                            <input type="checkbox" name="sensores" class="form-check-input" >
-                        </div>
-                        <div>
-                            <label>Comunicacion</label>
-                            <input type="checkbox" name="comunicacion" class="form-check-input" >
-                        </div>
-                        <div>
-                            <label>Limpieza</label>
-                            <input type="checkbox" name="limpieza" class="form-check-input" >
-                        </div>
-                                    
+                </tr>
+
+                <tr>
+                    <td width="5%"  >
+                        <input type="radio" name="limpieza" id="limpiezaYES" value="1"{% if ost.limpieza == 1 %} checked {% endif %}>
+                        <label for="limpiezaYES">SI</label>
+                    </td>
+                    <td width="5%"  >
+                        <input type="radio" name="limpieza" id="limpiezaNO" value="0" {% if ost.limpieza == 0 %} checked {% endif %}>
+                        <label for="limpiezaNO">NO</label>
+                    </td>
+                    <td width="20%"  >
+                        <label>Limpieza</label>
                     </td>
                 </tr>
             </table>
             <div>
                 <label>Observaciones</label>
-                <input type="text" name="observaciones" class="form-control" >
+                <input type="text" name="observaciones" class="form-control" value="{{ost.observaciones}}">
             </div>
-
 
             <input type="hidden" name="user_id" value="{{session['user_id']}}" >
             <input type="hidden" name="id" value="{{ost.id}}">
             <input type="submit" class="btn btn-success mt-3" value="Guardar Edicion">
         </form>
-    </div>
+
+       </div>
+  </div>
 </body>
 </html>

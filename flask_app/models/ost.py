@@ -62,7 +62,11 @@ class Ost:
     @classmethod
     def get_by_id(cls, form):
         
-        query = "SELECT * from ost JOIN clientes ON ost.id_cliente = clientes.id WHERE ost.id = %(id)s"
+        query = "SELECT ost.id, ost.folio, ost.id_cliente, clientes.nombre, ost.fecha,ost.equipo, ost.teclado, ost.scanner_laser, "
+        query +="ost.display, ost.touchpad, ost.gatillo, ost.carcasa_frontal, ost.carcasa_trasera, ost.puerto_comunicacion, "
+        query +="ost.cabezal, ost.platen_roller, ost.sensores, ost.comunicacion, ost.limpieza, ost.observaciones, ost.created_at, ost.updated_at "
+        query +="from ost JOIN clientes ON ost.id_cliente = clientes.id WHERE ost.id = %(id)s"
+
         result = connectToMySQL('esquema_servicio_tecnico').query_db(query, form) 
         
         Osts = cls(result[0])
