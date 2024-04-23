@@ -23,7 +23,7 @@ class User:
     def save(cls, form):
         #form = {"first_name":"Elena", "last_name":"De Troya", "email":"elena@cd.com", "password":YA ENCRIPTADA}
         query = "INSERT INTO users(first_name, last_name, email, password) VALUES(%(first_name)s, %(last_name)s, %(email)s, %(password)s)"
-        result = connectToMySQL('esquema_loginreg').query_db(query, form) #EL id del registro que creamos
+        result = connectToMySQL('esquema_servicio_tecnico').query_db(query, form) #EL id del registro que creamos
         return result
     
     @staticmethod
