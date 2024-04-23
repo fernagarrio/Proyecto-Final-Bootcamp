@@ -10,6 +10,7 @@ diccionario = {
 query = "INSERT INTO usuarios (nombre, apellido, email) VALUES(%(nombre)s, %(apellido)s, %(email)s) 
 result = connectToMySQL('crud_modularizado').query_db(query, diccionario) #ID del nuevo registro
 '''
+
 import pymysql.cursors
 class MySQLConnection:
     def __init__(self, db):
