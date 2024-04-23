@@ -6,6 +6,7 @@ from flask import flash #flash es el encargado de mostrar mensajes/errores
 import re #Importar las Expresiones Regulares
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') #Expresion regular de email
 
+
 class User:
 
     def __init__(self, data):
